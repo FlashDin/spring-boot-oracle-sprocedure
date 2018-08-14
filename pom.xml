@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.flashdin</groupId>
-    <artifactId>spring-boot-oracle</artifactId>
+    <artifactId>spring-boot-oracle-sprocedure</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring-boot-oracle</name>
+    <name>spring-boot-oracle-sprocedure</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>

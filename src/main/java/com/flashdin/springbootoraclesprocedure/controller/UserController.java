@@ -1,7 +1,7 @@
-package com.flashdin.springbootoracle.controller;
+package com.flashdin.springbootoraclesprocedure.controller;
 
-import com.flashdin.springbootoracle.entity.User;
-import com.flashdin.springbootoracle.service.UserSevice;
+import com.flashdin.springbootoraclesprocedure.entity.User;
+import com.flashdin.springbootoraclesprocedure.service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

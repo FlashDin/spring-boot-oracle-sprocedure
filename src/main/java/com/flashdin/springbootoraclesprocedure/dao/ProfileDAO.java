@@ -1,6 +1,6 @@
-package com.flashdin.springbootoracle.dao;
+package com.flashdin.springbootoraclesprocedure.dao;
 
-import com.flashdin.springbootoracle.entity.Profile;
+import com.flashdin.springbootoraclesprocedure.entity.Profile;
 
 import java.util.List;
 

@@ -1,12 +1,10 @@
-package com.flashdin.springbootoracle.dao.impl;
+package com.flashdin.springbootoraclesprocedure.dao.impl;
 
-import com.flashdin.springbootoracle.dao.ProfileDAO;
-import com.flashdin.springbootoracle.entity.Profile;
+import com.flashdin.springbootoraclesprocedure.dao.ProfileDAO;
+import com.flashdin.springbootoraclesprocedure.entity.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;

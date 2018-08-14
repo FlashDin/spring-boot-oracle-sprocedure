@@ -1,6 +1,6 @@
-package com.flashdin.springbootoracle.service;
+package com.flashdin.springbootoraclesprocedure.service;
 
-import com.flashdin.springbootoracle.entity.Profile;
+import com.flashdin.springbootoraclesprocedure.entity.Profile;
 
 import java.util.List;
 

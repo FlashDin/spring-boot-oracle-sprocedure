@@ -1,8 +1,8 @@
-package com.flashdin.springbootoracle.service.impl;
+package com.flashdin.springbootoraclesprocedure.service.impl;
 
-import com.flashdin.springbootoracle.dao.UserDAO;
-import com.flashdin.springbootoracle.entity.User;
-import com.flashdin.springbootoracle.service.UserSevice;
+import com.flashdin.springbootoraclesprocedure.dao.UserDAO;
+import com.flashdin.springbootoraclesprocedure.entity.User;
+import com.flashdin.springbootoraclesprocedure.service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

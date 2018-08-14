@@ -1,4 +1,4 @@
-package com.flashdin.springbootoracle.entity;
+package com.flashdin.springbootoraclesprocedure.entity;
 
 public class User {
 

@@ -1,6 +1,6 @@
-package com.flashdin.springbootoracle.dao.impl;
+package com.flashdin.springbootoraclesprocedure.dao.impl;
 
-import com.flashdin.springbootoracle.dao.UserDAO;
+import com.flashdin.springbootoraclesprocedure.dao.UserDAO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

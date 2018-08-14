@@ -1,8 +1,8 @@
-package com.flashdin.springbootoracle.dao;
+package com.flashdin.springbootoraclesprocedure.service;
 
 import java.util.List;
 
-public interface BaseDAO<T> {
+public interface BaseService<T> {
 
     T save(T param);
 

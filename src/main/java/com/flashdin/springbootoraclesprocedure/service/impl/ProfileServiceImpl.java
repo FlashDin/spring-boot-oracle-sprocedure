@@ -1,8 +1,8 @@
-package com.flashdin.springbootoracle.service.impl;
+package com.flashdin.springbootoraclesprocedure.service.impl;
 
-import com.flashdin.springbootoracle.dao.ProfileDAO;
-import com.flashdin.springbootoracle.entity.Profile;
-import com.flashdin.springbootoracle.service.ProfileSevice;
+import com.flashdin.springbootoraclesprocedure.dao.ProfileDAO;
+import com.flashdin.springbootoraclesprocedure.entity.Profile;
+import com.flashdin.springbootoraclesprocedure.service.ProfileSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;

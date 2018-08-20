@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.flashdin.springbootoraclesprocedure.dao.impl.UserDAOImplTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.491 s <<< FAILURE! - in com.flashdin.springbootoraclesprocedure.dao.impl.UserDAOImplTest
+findAll(com.flashdin.springbootoraclesprocedure.dao.impl.UserDAOImplTest)  Time elapsed: 0.068 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.flashdin.springbootoraclesprocedure.dao.impl.UserDAOImplTest.findAll(UserDAOImplTest.java:40)
+

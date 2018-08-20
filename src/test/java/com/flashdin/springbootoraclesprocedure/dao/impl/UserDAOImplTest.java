@@ -20,6 +20,7 @@ public class UserDAOImplTest {
 
     @Test
     public void save() {
+
     }
 
     @Test
@@ -36,6 +37,7 @@ public class UserDAOImplTest {
 
     @Test
     public void findAll() {
+        userDAO.findAll();
     }
 
     @Test

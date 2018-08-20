@@ -2,14 +2,19 @@ package com.flashdin.springbootoraclesprocedure.dao.impl;
 
 import com.flashdin.springbootoraclesprocedure.dao.UserDAO;
 import com.flashdin.springbootoraclesprocedure.entity.User;
+import oracle.jdbc.OracleTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -19,40 +24,50 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User save(User param) {
-        String sql = "insert into table_user (username,password) values (?,?)";
-        int rtn = jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, param.getUsername());
-            ps.setString(2, param.getPassword());
-            return ps;
-        });
-        param.setId(rtn);
+//        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("procInsUser");
+//        jdbcCall.addDeclaredParameter(new SqlParameter("p_username", OracleTypes.VARCHAR));
+//        jdbcCall.addDeclaredParameter(new SqlOutParameter("p_password", OracleTypes.VARCHAR));
+//        Map<String, String> callParams = new HashMap<>();
+//        callParams.put("p_username", param.getUsername());
+//        callParams.put("p_password", param.getPassword());
+//        Map<String, Object> outputMap = jdbcCall.execute(callParams);
+        jdbcTemplate.setResultsMapCaseInsensitive(true);
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("procInsUser")
+                .declareParameters(new SqlParameter("p_username", OracleTypes.VARCHAR),
+                        new SqlParameter("p_password", OracleTypes.VARCHAR));
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("p_username", param.getUsername())
+                .addValue("p_password", param.getPassword());
+        Map out = jdbcCall.execute(in);
+        int res = ((BigDecimal) out.get("p_res")).intValue();
+        param.setId(res);
+        param.setUsername((String) out.get("p_username"));
+        param.setPassword((String) out.get("p_password"));
         return param;
     }
 
     @Override
     public User update(User param) {
-        String sql = "update table_user set username=?,password=? where id=?";
-        int rtn = jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, param.getUsername());
-            ps.setString(2, param.getPassword());
-            ps.setInt(3, param.getId());
-            return ps;
-        });
-        param.setId(rtn);
+        jdbcTemplate.setResultsMapCaseInsensitive(true);
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("procUptUser");
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("p_id", param.getId())
+                .addValue("p_username", param.getUsername())
+                .addValue("p_password", param.getPassword());
+        Map out = jdbcCall.execute(in);
+        int res = ((BigDecimal) out.get("p_res")).intValue();
+        param.setId(res);
         return param;
     }
 
     @Override
     public int delete(User param) {
-        String sql = "delete from table_user where id=?";
-        int rtn = jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, param.getId());
-            return ps;
-        });
-        return rtn;
+        jdbcTemplate.setResultsMapCaseInsensitive(true);
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("procDelUser");
+        SqlParameterSource in = new MapSqlParameterSource().addValue("p_id", param.getId());
+        Map out = jdbcCall.execute(in);
+        int res = ((BigDecimal) out.get("p_res")).intValue();
+        return res;
     }
 
     @Override
@@ -63,8 +78,12 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> findAll() {
-        String sql = "select * from table_user";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+//        String sql = "select * from table_user";
+//        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+        jdbcTemplate.setResultsMapCaseInsensitive(true);
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("procFindAllUser");
+        Map<String, Object> out = jdbcCall.execute();
+        return (List<User>) out.get("dataSets");
     }
 
     @Override
@@ -72,4 +91,5 @@ public class UserDAOImpl implements UserDAO {
         String sql = "select * from table_user where username like ?";
         return jdbcTemplate.query(sql, new Object[]{"%" + param.getUsername() + "%"}, new BeanPropertyRowMapper<>(User.class));
     }
+
 }

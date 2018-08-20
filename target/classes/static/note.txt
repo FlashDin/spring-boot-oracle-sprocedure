@@ -1,0 +1,113 @@
+# function
+-----------------------------------------------------------------------------------
+
+create or replace function funcFindAllUser
+  return varchar
+is result varchar(100);
+  begin
+    select * into result from TABLE_USER;
+    return result;
+  end;
+
+-----------------------------------------------------------------------------------
+
+create or replace function funcInsUser(p_username IN TABLE_USER.USERNAME%TYPE,
+                                       p_password IN TABLE_USER.PASSWORD%TYPE)
+  return varchar
+is result varchar(100);
+  begin
+    insert into TABLE_USER (USERNAME, PASSWORD) values (p_username, p_password);
+    result := p_username || ' ' || p_password || ' Insert Row ' || ' ' || TO_CHAR(SQL%ROWCOUNT);
+    return (result);
+    exception when others
+    then
+      result := 'Insert gagal';
+      return (result);
+  end;
+
+-----------------------------------------------------------------------------------
+
+create or replace function funcUptUser(p_id       IN TABLE_USER.ID%TYPE,
+                                       p_username IN TABLE_USER.USERNAME%TYPE,
+                                       p_password IN TABLE_USER.PASSWORD%TYPE)
+  return varchar
+is result varchar(100);
+  begin
+    update TABLE_USER
+    set USERNAME = p_username,
+        PASSWORD = p_password
+    where ID = p_id;
+    result := p_username || ' ' || p_password || ' Update Row ' || ' ' || TO_CHAR(SQL%ROWCOUNT);
+    return (result);
+    exception when others
+    then
+      result := 'Update gagal';
+      return (result);
+  end;
+
+-----------------------------------------------------------------------------------
+
+create or replace function funcDelUser(p_id IN TABLE_USER.ID%TYPE)
+  return varchar
+is result varchar(100);
+  begin
+    delete from TABLE_USER where ID = p_id;
+    result := p_username || ' ' || p_password || ' Delete Row ' || ' ' || TO_CHAR(SQL%ROWCOUNT);
+    return (result);
+    exception when others
+    then
+      result := 'Delete gagal';
+      return (result);
+  end;
+
+-----------------------------------------------------------------------------------
+
+create or replace procedure proInsUser(p_username IN TABLE_USER.USERNAME%TYPE,
+                                       p_password IN TABLE_USER.PASSWORD%TYPE)
+is
+  begin
+
+    commit;
+  end;
+
+
+begin
+  PROINSUSER('pro user2', 'pro pass2');
+end;
+
+select *
+from TABLE_USER;
+
+# procedure
+create or replace procedure procFindUserById(p_id IN TABLE_USER.ID%TYPE, dataSets OUT SYS_REFCURSOR)
+is
+  begin
+    open dataSets for select * from TABLE_USER where ID = p_id;
+    commit;
+  end;
+
+create or replace procedure procFindAllUser(dataSets OUT SYS_REFCURSOR)
+is
+  begin
+    open dataSets for select * from TABLE_USER;
+  end;
+
+  # run
+ begin
+      PROINSUSER('pro user2','pro pass2');
+  end;
+
+DECLARE
+  CURSOR dataSets
+  IS
+    SELECT *
+    FROM TABLE_USER;
+BEGIN
+  FOR u
+  IN dataSets
+  LOOP
+    DBMS_OUTPUT.put_line (u.USERNAME);
+  END LOOP;
+END;
+
+pak dimas :
